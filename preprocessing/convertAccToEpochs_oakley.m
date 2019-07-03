@@ -87,7 +87,7 @@ while epochStart <= time1(end)
     end
     
     % Sum data in this epoch and scale according to parameters in reference
-    epochCount(iEpoch) = sum(accEpoch) * 66 - 3.3;
+    epochCount(iEpoch) = sum(accEpoch);
     
     epochStart = iEpoch * epochLength;   
     iEpoch = iEpoch + 1;

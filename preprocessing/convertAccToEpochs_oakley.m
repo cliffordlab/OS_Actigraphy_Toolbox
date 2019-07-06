@@ -1,4 +1,4 @@
-function epochCount = convertAccToEpochs_oakley(acc, time, epochLength)
+function epochCount = convertAccToEpochs_oakley(acc, time, epochLength, fs)
 % 
 % Overview
 %   Converts raw accelerometer signal into activity counts - Oakley method
@@ -25,7 +25,7 @@ function epochCount = convertAccToEpochs_oakley(acc, time, epochLength)
 % of the BSD license. See the LICENSE file in this repo for details.
 
 % Band pass butterworth filter (0.25Hz to 2.5Hz)
-acc = accBPFilter_clifford_30Hz(acc); % This filter is for Fs = 30Hz;
+%acc = accBPFilter_clifford_30Hz(acc); % This filter is for Fs = 30Hz;
 
 % Determine the maximum absolute value inside 1-second windows
 iEpoch = 1;
@@ -37,7 +37,7 @@ ftemp=find(time==0); % the index for time == 0
 if ~isempty(ftemp)
     fstart=ftemp(1); % set fstart as the index where time == 0 if exist
 end
-fseg=epochLength*3; % set a 3 * epochLength buffer for find()
+fseg=epochLength*3*fs; % set a 3 * epochLength buffer for find()
 fend=length(time);
 
 while epochStart <= time(end)
